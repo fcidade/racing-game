@@ -16,7 +16,7 @@ public class CameraFollow : MonoBehaviour
         transform.LookAt(target);
         if (Vector3.Distance(transform.position, target.position) > cameraDistance)
         {
-            transform.position = Vector3.Lerp(transform.position, target.position, Time.deltaTime);
+            transform.position = Vector3.Lerp(transform.position, target.position + (-target.forward * cameraDistance), Time.deltaTime);
         }
     }
 }

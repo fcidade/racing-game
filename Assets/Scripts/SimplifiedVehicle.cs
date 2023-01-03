@@ -32,10 +32,6 @@ public class SimplifiedVehicle : MonoBehaviour
     [SerializeField, Range(0f, 1f)]
     float tireGripFactor = .5f;
 
-    /* Anti Roll */
-    [SerializeField, Header("Anti Roll")]
-    float antiRollFlipStrength = 10f;
-
     Rigidbody body;
 
     void Start()
@@ -102,7 +98,10 @@ public class SimplifiedVehicle : MonoBehaviour
         }
 
         /* Rotation (Allow rotation in the air) */
-        body.AddTorque(transform.up * steeringRotationDirection * steeringSpeed * inputDirection);
+        if (inputDirection != 0 || body.velocity.z > 1)
+        {
+            body.AddTorque(transform.up * steeringRotationDirection * steeringSpeed * (inputDirection == 0 ? 1 : inputDirection));
+        }
 
         if (atLeastOneTireIsOnTheGround)
         {
@@ -116,10 +115,5 @@ public class SimplifiedVehicle : MonoBehaviour
             float desiredAccel = desiredVelChange / Time.fixedDeltaTime;
             body.AddForce(steeringDir * tireMass * desiredAccel);
         }
-
-        // if (Mathf.Abs(transform.localRotation.eulerAngles.z) > 90f)
-        // {
-        //     body.AddRelativeTorque(0f, 0f, antiRollFlipStrength, ForceMode.Acceleration);
-        // }
     }
 }
