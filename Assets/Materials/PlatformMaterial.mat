@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: GroundMaterial
+  m_Name: PlatformMaterial
   m_Shader: {fileID: 4800000, guid: 9e0b78a84584ffb4b9d963b4c6f26436, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
@@ -70,15 +70,15 @@ Material:
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
-    - _FresnelBrightness: 0
-    - _FresnelPower: 0
-    - _FresnelShadowDropoff: 0
+    - _FresnelBrightness: 0.33
+    - _FresnelPower: 0.665
+    - _FresnelShadowDropoff: 1
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
-    - _HighIntensity: 1.5
+    - _HighIntensity: 1.58
     - _LightScalar: 1
-    - _LowIntensity: 1
+    - _LowIntensity: 0.7
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
@@ -96,9 +96,9 @@ Material:
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _FresnelColor: {r: 1, g: 1, b: 1, a: 1}
-    - _HighColor: {r: 0.6415094, g: 0.6415094, b: 0.6415094, a: 1}
-    - _LowColor: {r: 0.509434, g: 0.509434, b: 0.509434, a: 1}
+    - _FresnelColor: {r: 0, g: 0, b: 0, a: 1}
+    - _HighColor: {r: 1, g: 1, b: 1, a: 1}
+    - _LowColor: {r: 0.153, g: 0.63235295, b: 1, a: 1}
     - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
     - _RimColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
