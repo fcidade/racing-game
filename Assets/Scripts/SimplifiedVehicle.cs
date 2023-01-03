@@ -31,21 +31,36 @@ public class SimplifiedVehicle : MonoBehaviour
     [SerializeField, Range(0f, 1f)]
     float tireGripFactor = .5f;
 
+    [SerializeField, Range(0f, 1f)]
+    float driftingTireGripFactor = .9f;
+
     Rigidbody body;
     ParticleSystem[] wheelDustParticleSystems;
-    TrailRenderer[] wheelDriftingTrails;
+    List<TrailRenderer> wheelDriftingTrails;
 
     bool isDrifting = false;
+    bool atLeastOneTireIsOnTheGround = false;
+    bool allTiresAreOnTheGround = false;
 
     void Awake()
     {
         body = GetComponent<Rigidbody>();
         wheelDustParticleSystems = GetComponentsInChildren<ParticleSystem>();
-        wheelDriftingTrails = GetComponentsInChildren<TrailRenderer>();
+
+        wheelDriftingTrails = new List<TrailRenderer>();
+        foreach (var trail in GetComponentsInChildren<TrailRenderer>())
+        {
+            if (trail.tag == "Drifting")
+            {
+                wheelDriftingTrails.Add(trail);
+            }
+        }
     }
 
     void Update()
     {
+        isDrifting = Input.GetButton("Drift");
+
         var isCarMoving = body.velocity.magnitude > .5;
         foreach (var particleSystem in wheelDustParticleSystems)
         {
@@ -61,7 +76,7 @@ public class SimplifiedVehicle : MonoBehaviour
 
         foreach (var trail in wheelDriftingTrails)
         {
-            trail.enabled = isDrifting;
+            trail.emitting = isDrifting && allTiresAreOnTheGround;
         }
     }
 
@@ -72,12 +87,14 @@ public class SimplifiedVehicle : MonoBehaviour
 
         RotateWheels(steeringRotationDirection);
 
-        bool atLeastOneTireIsOnTheGround = false;
+        atLeastOneTireIsOnTheGround = false;
+        allTiresAreOnTheGround = true;
         for (var i = 0; i < springs.Count; i++)
         {
             var spring = springs[i];
             var wheelGraphics = wheelsGraphics[i];
             atLeastOneTireIsOnTheGround |= CalculateSpringSuspension(spring, wheelGraphics);
+            allTiresAreOnTheGround &= atLeastOneTireIsOnTheGround;
         }
 
         /* Rotation (Allow rotation in the air) */
@@ -95,7 +112,7 @@ public class SimplifiedVehicle : MonoBehaviour
             /* Steering */
             Vector3 steeringDir = transform.right;
             float steeringVel = Vector3.Dot(steeringDir, body.velocity);
-            float desiredVelChange = -steeringVel * tireGripFactor;
+            float desiredVelChange = -steeringVel * (isDrifting ? driftingTireGripFactor : tireGripFactor);
             float desiredAccel = desiredVelChange / Time.fixedDeltaTime;
             body.AddForce(steeringDir * tireMass * desiredAccel);
         }
