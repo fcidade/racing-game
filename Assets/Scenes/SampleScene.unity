@@ -189,7 +189,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &132239640
 GameObject:
@@ -310,6 +310,56 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5508081357746612910, guid: 522addb118597d94ebef2c2367e52edf, type: 3}
   m_PrefabInstance: {fileID: 5508081357460510344}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &438784529
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 438784531}
+  - component: {fileID: 438784530}
+  m_Layer: 0
+  m_Name: VehicleCamera
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &438784530
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 438784529}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9b7f56786f53fe439604a0f4ccd9395, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 319994918}
+  cameraDistance: 6
+  cameraVelocity: 3
+  cameraRotationVelocity: 0.5
+  cameraHeight: 1.7
+--- !u!4 &438784531
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 438784529}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 35.40561, y: 17.17385, z: 27.709906}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 586390829}
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &481323541
 GameObject:
   m_ObjectHideFlags: 0
@@ -418,7 +468,6 @@ GameObject:
   - component: {fileID: 586390829}
   - component: {fileID: 586390831}
   - component: {fileID: 586390830}
-  - component: {fileID: 586390832}
   m_Layer: 0
   m_Name: Camera
   m_TagString: Untagged
@@ -433,13 +482,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 586390828}
-  m_LocalRotation: {x: 0.13945766, y: 0.34556904, z: -0.05201577, w: 0.92651385}
-  m_LocalPosition: {x: 8.884856, y: 6.8289623, z: -7.9695935}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_Father: {fileID: 438784531}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!81 &586390830
 AudioListener:
@@ -492,20 +541,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!114 &586390832
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 586390828}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f9b7f56786f53fe439604a0f4ccd9395, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 319994918}
-  cameraDistance: 2
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -634,7 +669,7 @@ Transform:
   - {fileID: 2128056610}
   - {fileID: 481323542}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &860079702
 GameObject:
@@ -900,7 +935,7 @@ RectTransform:
   m_Children:
   - {fileID: 961663890}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1211,6 +1246,14 @@ PrefabInstance:
     - target: {fileID: 5508081357746612907, guid: 522addb118597d94ebef2c2367e52edf, type: 3}
       propertyPath: m_Name
       value: Car
+      objectReference: {fileID: 0}
+    - target: {fileID: 5508081357746612908, guid: 522addb118597d94ebef2c2367e52edf, type: 3}
+      propertyPath: speed
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 5508081357746612908, guid: 522addb118597d94ebef2c2367e52edf, type: 3}
+      propertyPath: tireGripFactor
+      value: 0.15
       objectReference: {fileID: 0}
     - target: {fileID: 5508081357746612910, guid: 522addb118597d94ebef2c2367e52edf, type: 3}
       propertyPath: m_RootOrder
