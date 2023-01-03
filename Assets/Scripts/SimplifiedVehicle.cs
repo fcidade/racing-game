@@ -8,6 +8,10 @@ public class SimplifiedVehicle : MonoBehaviour
     [SerializeField]
     List<Transform> springs;
 
+    /* Suspension */
+    [SerializeField]
+    List<Transform> wheelsGraphics;
+
     [SerializeField, Header("Suspension")]
     float restDistance;
 
@@ -41,13 +45,17 @@ public class SimplifiedVehicle : MonoBehaviour
 
     void FixedUpdate()
     {
-
         var inputDirection = Input.GetAxis("Vertical");
         var steeringRotationDirection = Input.GetAxis("Horizontal");
 
+
         bool atLeastOneTireIsOnTheGround = false;
-        foreach (var spring in springs)
+        for (var i = 0; i < springs.Count; i++)
         {
+            var spring = springs[i];
+            var wheelGraphics = wheelsGraphics[i];
+
+            wheelGraphics.Rotate(0, 0, -body.velocity.z);
 
             Debug.DrawRay(spring.position, spring.up, Color.green);
             Debug.DrawRay(spring.position, spring.right, Color.red);
@@ -60,6 +68,8 @@ public class SimplifiedVehicle : MonoBehaviour
             atLeastOneTireIsOnTheGround |= rayHadHit;
             if (rayHadHit)
             {
+                wheelGraphics.position = Vector3.Lerp(wheelGraphics.position, hit.point + Vector3.up * .4f, Time.deltaTime * 2);
+
                 /* Suspension */
                 // The spring force direction can be relative to the tire up, or the rigidbody up, or to the ground normal
                 Vector3 springForceDirection = transform.up;
@@ -80,6 +90,10 @@ public class SimplifiedVehicle : MonoBehaviour
                 // Apply force to the position of the spring
                 body.AddForceAtPosition(springForceDirection * force, spring.position);
                 Debug.DrawRay(spring.position, springForceDirection * force, Color.yellow);
+            }
+            else
+            {
+                wheelGraphics.position = Vector3.Lerp(wheelGraphics.position, spring.position, Time.deltaTime * 2);
             }
         }
 
