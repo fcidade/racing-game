@@ -48,6 +48,10 @@ public class SimplifiedVehicle : MonoBehaviour
         var inputDirection = Input.GetAxis("Vertical");
         var steeringRotationDirection = Input.GetAxis("Horizontal");
 
+        var rot = Quaternion.Euler(wheelsGraphics[0].localRotation.x, (30f * steeringRotationDirection), wheelsGraphics[0].localRotation.z);
+
+        wheelsGraphics[0].localRotation = Quaternion.Lerp(wheelsGraphics[0].localRotation, rot, Time.deltaTime * 3);
+        wheelsGraphics[1].localRotation = Quaternion.Lerp(wheelsGraphics[1].localRotation, rot, Time.deltaTime * 3);
 
         bool atLeastOneTireIsOnTheGround = false;
         for (var i = 0; i < springs.Count; i++)
@@ -55,7 +59,7 @@ public class SimplifiedVehicle : MonoBehaviour
             var spring = springs[i];
             var wheelGraphics = wheelsGraphics[i];
 
-            wheelGraphics.Rotate(0, 0, -body.velocity.z);
+            wheelGraphics.Rotate(body.velocity.z, 0, 0);
 
             Debug.DrawRay(spring.position, spring.up, Color.green);
             Debug.DrawRay(spring.position, spring.right, Color.red);
