@@ -2,7 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SimplifiedVehicle : MonoBehaviour
+[RequireComponent(typeof(Rigidbody))]
+public class Vehicle : MonoBehaviour
 {
     /* Suspension */
     [SerializeField]
@@ -42,16 +43,42 @@ public class SimplifiedVehicle : MonoBehaviour
     bool atLeastOneTireIsOnTheGround = false;
     bool allTiresAreOnTheGround = false;
 
+    float accelerationDirection;
+    float steeringRotationDirection;
+
+    public void Accelerate(float direction)
+    {
+        accelerationDirection = direction;
+    }
+    public void SteerWheels(float direction)
+    {
+        steeringRotationDirection = direction;
+    }
+    public void Drift()
+    {
+        isDrifting = true;
+    }
+    public void StopDrift()
+    {
+        isDrifting = false;
+    }
+
     void Awake()
     {
         body = GetComponent<Rigidbody>();
         wheelDustParticleSystems = GetComponentsInChildren<ParticleSystem>();
+
+        foreach (var wheelDustParticleSystem in wheelDustParticleSystems)
+        {
+            wheelDustParticleSystem.Stop();
+        }
 
         wheelDriftingTrails = new List<TrailRenderer>();
         foreach (var trail in GetComponentsInChildren<TrailRenderer>())
         {
             if (trail.tag == "Drifting")
             {
+                trail.emitting = false;
                 wheelDriftingTrails.Add(trail);
             }
         }
@@ -59,8 +86,6 @@ public class SimplifiedVehicle : MonoBehaviour
 
     void Update()
     {
-        isDrifting = Input.GetButton("Drift");
-
         var isCarMoving = body.velocity.magnitude > .5;
         foreach (var particleSystem in wheelDustParticleSystems)
         {
@@ -82,9 +107,6 @@ public class SimplifiedVehicle : MonoBehaviour
 
     void FixedUpdate()
     {
-        var inputDirection = Input.GetAxis("Vertical");
-        var steeringRotationDirection = Input.GetAxis("Horizontal");
-
         RotateWheels(steeringRotationDirection);
 
         atLeastOneTireIsOnTheGround = false;
@@ -98,8 +120,8 @@ public class SimplifiedVehicle : MonoBehaviour
         }
 
         /* Rotation (Allow rotation in the air) */
-        RotateCar(inputDirection, steeringRotationDirection);
-        AccelerateCar(inputDirection, atLeastOneTireIsOnTheGround);
+        RotateCar(accelerationDirection, steeringRotationDirection);
+        AccelerateCar(accelerationDirection, atLeastOneTireIsOnTheGround);
     }
 
     private void AccelerateCar(float inputDirection, bool atLeastOneTireIsOnTheGround)

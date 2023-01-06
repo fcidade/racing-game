@@ -64,7 +64,7 @@ Material:
     m_Floats:
     - _BumpScale: 1
     - _Cutoff: 0.5
-    - _Detail: 0.249
+    - _Detail: 0.301
     - _DetailNormalMapScale: 1
     - _DitherSize: 1
     - _DstBlend: 0
@@ -83,6 +83,6 @@ Material:
     m_Colors:
     - _Color: {r: 0.9811321, g: 0.059238106, b: 0.059238106, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _MainColor: {r: 0.5882353, g: 0.13264506, b: 0.18069445, a: 1}
-    - _ShadowColor: {r: 0.35686275, g: 0.08708539, b: 0.05478812, a: 1}
+    - _MainColor: {r: 0.91764706, g: 0.38431373, b: 0.38431373, a: 1}
+    - _ShadowColor: {r: 0.45882353, g: 0.09019608, b: 0.3372549, a: 1}
   m_BuildTextureStacks: []

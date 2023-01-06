@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: DitheringMaterial
+  m_Name: Platform1
   m_Shader: {fileID: 4800000, guid: ebe9285c8f8c6314aa44b009b4e1e314, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
@@ -83,6 +83,6 @@ Material:
     m_Colors:
     - _Color: {r: 0.9811321, g: 0.059238106, b: 0.059238106, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _MainColor: {r: 1, g: 0.53574693, b: 0.27735847, a: 1}
-    - _ShadowColor: {r: 0.7169812, g: 0.051212933, b: 0, a: 1}
+    - _MainColor: {r: 0.5529412, g: 0.7176471, b: 1, a: 1}
+    - _ShadowColor: {r: 0.5137255, g: 0.3019608, b: 0.76862746, a: 1}
   m_BuildTextureStacks: []

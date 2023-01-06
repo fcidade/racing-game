@@ -25,6 +25,18 @@ public class CameraFollow : MonoBehaviour
         camera = GetComponentInChildren<Camera>();
     }
 
+    public void SetTarget(Transform target) {
+        this.target = target;
+    }
+
+    public void SetCameraViewport(Rect viewportRect) {
+        camera.rect = viewportRect;
+    }
+
+    public void RemoveAudioListener() {
+        GetComponentInChildren<AudioListener>().enabled = false;
+    }
+
     void FixedUpdate()
     {
         if (!target || !camera) return;
